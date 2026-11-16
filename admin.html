@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHSUD Region VI · Employee Records</title>
+    <!-- Font Awesome Icons for better visuals -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            padding: 2rem 1.5rem;
+            color: #1e2a41;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        /* header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-area h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            color: #0b2b4b;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-area h1 i {
+            color: #1e6f9f;
+            font-size: 2.2rem;
+        }
+
+        .logo-area p {
+            color: #4a5f7a;
+            font-weight: 400;
+            margin-top: 0.2rem;
+            letter-spacing: 0.3px;
+        }
+
+        .badge {
+            background: #e1ecf7;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: #0b2b4b;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .badge i {
+            color: #1e6f9f;
+        }
+
+        /* form card */
+        .form-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2rem 1.8rem;
+            box-shadow: 0 12px 30px rgba(0, 20, 40, 0.06);
+            margin-bottom: 2.5rem;
+            border: 1px solid #e3eaf2;
+        }
+
+        .form-card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0b2b4b;
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .form-card h2 i {
+            color: #1e6f9f;
+            background: #e6f0fa;
+            padding: 0.5rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.2rem 1.5rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .form-group label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #4b5f7a;
+        }
+
+        .form-group label i {
+            margin-right: 0.3rem;
+            color: #1e6f9f;
+            font-size: 0.8rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.7rem 1rem;
+            border: 1.5px solid #dbe2eb;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            background: #fafcff;
+            transition: 0.2s;
+            outline: none;
+            color: #1e2a41;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #1e6f9f;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(30, 111, 159, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: #9aaec5;
+            font-weight: 300;
+        }
+
+        /* fieldset-like section headers */
+        .section-label {
+            grid-column: 1 / -1;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #0b2b4b;
+            margin-top: 0.3rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px dashed #cfdeed;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-label i {
+            color: #1e6f9f;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #1e6f9f;
+            color: white;
+            border: none;
+            padding: 0.9rem 2.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 6px 16px rgba(30, 111, 159, 0.25);
+            letter-spacing: 0.2px;
+        }
+
+        .btn-primary:hover {
+            background: #15587d;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(30, 111, 159, 0.2);
+        }
+
+        .btn-primary i {
+            font-size: 1rem;
+        }
+
+        /* table card */
+        .table-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.5rem 1.8rem 1.8rem;
+            box-shadow: 0 12px 30px rgba(0, 20, 40, 0.04);
+            border: 1px solid #e3eaf2;
+            overflow-x: auto;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .table-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #0b2b4b;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .table-header h2 i {
+            color: #1e6f9f;
+        }
+
+        .count-badge {
+            background: #eef3f9;
+            padding: 0.35rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1e6f9f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.83rem;
+            min-width: 1400px;
+            white-space: nowrap;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.9rem 0.8rem;
+            background: #f0f6fd;
+            color: #0b2b4b;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            border-bottom: 2px solid #d0e0f0;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0.85rem 0.8rem;
+            border-bottom: 1px solid #e9eff6;
+            color: #1e2a41;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f9fcff;
+        }
+
+        .empty-row td {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: #8a9bb2;
+            font-style: italic;
+            font-size: 0.95rem;
+            background: #fbfdff;
+        }
+
+        .btn-delete {
+            background: transparent;
+            border: 1px solid #f0cdcd;
+            color: #c24a4a;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-delete:hover {
+            background: #fef2f2;
+            border-color: #d99b9b;
+        }
+
+        .small-note {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: #8a9bb2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .small-note i {
+            color: #1e6f9f;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            body { padding: 1rem; }
+            .form-card { padding: 1.5rem; }
+            .header { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- header -->
+    <div class="header">
+        <div class="logo-area">
+            <h1><i class="fas fa-building"></i> DHSUD Region VI</h1>
+            <p>Human Resource Management · Employee Records</p>
+        </div>
+        <div class="badge">
+            <i class="fas fa-users"></i> <span id="employeeCount">0</span> employees
+        </div>
+    </div>
+
+    <!-- ADD EMPLOYEE FORM -->
+    <div class="form-card">
+        <h2><i class="fas fa-user-plus"></i> Add New Employee</h2>
+        <form id="employeeForm">
+            <div class="form-grid">
+                <!-- PERSONAL INFORMATION -->
+                <div class="section-label"><i class="fas fa-id-card"></i> Personal Information</div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Complete Name</label>
+                    <input type="text" id="fullName" placeholder="e.g. Juan A. Dela Cruz" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-home"></i> Address</label>
+                    <input type="text" id="address" placeholder="Street, City, Province" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-birthday-cake"></i> Birthday</label>
+                    <input type="date" id="birthday" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-tint"></i> Blood Type</label>
+                    <select id="bloodType" required>
+                        <option value="">Select</option>
+                        <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                        <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-phone-alt"></i> Contact Number</label>
+                    <input type="tel" id="contactNo" placeholder="e.g. 0917 123 4567" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-user-friends"></i> Emergency Contact Person</label>
+                    <input type="text" id="emergencyPerson" placeholder="Full name" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-phone-square-alt"></i> Emergency Contact No.</label>
+                    <input type="tel" id="emergencyNo" placeholder="e.g. 0918 987 6543" required>
+                </div>
+
+                <!-- EMPLOYMENT INFORMATION -->
+                <div class="section-label"><i class="fas fa-briefcase"></i> Employment Information</div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-user-tie"></i> Position</label>
+                    <input type="text" id="position" placeholder="e.g. Administrative Officer" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-layer-group"></i> Salary Grade</label>
+                    <input type="text" id="salaryGrade" placeholder="e.g. SG-11" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-money-bill-wave"></i> Salary</label>
+                    <input type="number" id="salary" step="0.01" placeholder="e.g. 25000.00" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-sitemap"></i> Division</label>
+                    <input type="text" id="division" placeholder="e.g. Administrative Division" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-check-circle"></i> Employment Status</label>
+                    <select id="employmentStatus" required>
+                        <option value="">Select</option>
+                        <option>Permanent</option>
+                        <option>Contractual</option>
+                        <option>Job Order</option>
+                        <option>Casual</option>
+                        <option>Project Based</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Start Date</label>
+                    <input type="date" id="startDate" required>
+                </div>
+
+                <!-- GOVERNMENT NUMBERS -->
+                <div class="section-label"><i class="fas fa-id-card-alt"></i> Government Numbers</div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-key"></i> GISIS No.</label>
+                    <input type="text" id="gisisNo" placeholder="e.g. 1234-5678-90" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-shield-alt"></i> SSS No.</label>
+                    <input type="text" id="sssNo" placeholder="e.g. 34-1234567-8" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-file-invoice"></i> TIN No.</label>
+                    <input type="text" id="tinNo" placeholder="e.g. 123-456-789-000" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-piggy-bank"></i> Pag-IBIG No.</label>
+                    <input type="text" id="pagibigNo" placeholder="e.g. 1234-5678-9012" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-heartbeat"></i> PhilHealth Number</label>
+                    <input type="text" id="philhealthNo" placeholder="e.g. 12-345678901-2" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">
+                <i class="fas fa-save"></i> Save Employee
+            </button>
+        </form>
+    </div>
+
+    <!-- EMPLOYEE TABLE -->
+    <div class="table-card">
+        <div class="table-header">
+            <h2><i class="fas fa-list-ul"></i> Employee List</h2>
+            <span class="count-badge" id="tableCountBadge">0 records</span>
+        </div>
+        <table id="employeeTable">
+            <thead>
+                <tr>
+                    <th>Complete Name</th>
+                    <th>Address</th>
+                    <th>Birthday</th>
+                    <th>Blood Type</th>
+                    <th>Contact No.</th>
+                    <th>Emergency Person</th>
+                    <th>Emergency No.</th>
+                    <th>Position</th>
+                    <th>Salary Grade</th>
+                    <th>Salary</th>
+                    <th>Division</th>
+                    <th>Employment Status</th>
+                    <th>Start Date</th>
+                    <th>GISIS No.</th>
+                    <th>SSS No.</th>
+                    <th>TIN No.</th>
+                    <th>Pag-IBIG No.</th>
+                    <th>PhilHealth No.</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- filled by JS -->
+            </tbody>
+        </table>
+        <div class="small-note">
+            <i class="fas fa-info-circle"></i> All data is stored locally in your browser. Use the delete button to remove a record.
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // --- employee data store ---
+        let employees = [];
+
+        // --- DOM elements ---
+        const form = document.getElementById('employeeForm');
+        const tableBody = document.getElementById('tableBody');
+        const employeeCountSpan = document.getElementById('employeeCount');
+        const tableCountBadge = document.getElementById('tableCountBadge');
+
+        // --- helper: update counts ---
+        function updateCounts() {
+            const count = employees.length;
+            employeeCountSpan.textContent = count;
+            tableCountBadge.textContent = count + (count === 1 ? ' record' : ' records');
+        }
+
+        // --- helper: render table ---
+        function renderTable() {
+            if (employees.length === 0) {
+                tableBody.innerHTML = `
+                    <tr class="empty-row">
+                        <td colspan="19">
+                            <i class="fas fa-user-slash" style="margin-right: 0.6rem;"></i>
+                            No employees yet. Add your first DHSUD Region VI employee above.
+                        </td>
+                    </tr>
+                `;
+                updateCounts();
+                return;
+            }
+
+            let html = '';
+            employees.forEach((emp, index) => {
+                html += `
+                    <tr>
+                        <td><strong>${escapeHtml(emp.fullName)}</strong></td>
+                        <td>${escapeHtml(emp.address)}</td>
+                        <td>${escapeHtml(emp.birthday)}</td>
+                        <td>${escapeHtml(emp.bloodType)}</td>
+                        <td>${escapeHtml(emp.contactNo)}</td>
+                        <td>${escapeHtml(emp.emergencyPerson)}</td>
+                        <td>${escapeHtml(emp.emergencyNo)}</td>
+                        <td>${escapeHtml(emp.position)}</td>
+                        <td>${escapeHtml(emp.salaryGrade)}</td>
+                        <td>₱ ${formatSalary(emp.salary)}</td>
+                        <td>${escapeHtml(emp.division)}</td>
+                        <td>${escapeHtml(emp.employmentStatus)}</td>
+                        <td>${escapeHtml(emp.startDate)}</td>
+                        <td>${escapeHtml(emp.gisisNo)}</td>
+                        <td>${escapeHtml(emp.sssNo)}</td>
+                        <td>${escapeHtml(emp.tinNo)}</td>
+                        <td>${escapeHtml(emp.pagibigNo)}</td>
+                        <td>${escapeHtml(emp.philhealthNo)}</td>
+                        <td>
+                            <button class="btn-delete" data-index="${index}">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tableBody.innerHTML = html;
+            updateCounts();
+
+            // Attach delete listeners
+            document.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const idx = this.getAttribute('data-index');
+                    if (idx !== null) {
+                        deleteEmployee(parseInt(idx));
+                    }
+                });
+            });
+        }
+
+        // --- escape HTML to prevent XSS ---
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // --- format salary with commas and 2 decimals ---
+        function formatSalary(value) {
+            const num = parseFloat(value);
+            if (isNaN(num)) return '0.00';
+            return num.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // --- delete employee ---
+        function deleteEmployee(index) {
+            if (index >= 0 && index < employees.length) {
+                employees.splice(index, 1);
+                renderTable();
+            }
+        }
+
+        // --- save to localStorage ---
+        function saveToLocalStorage() {
+            localStorage.setItem('dhsud_region6_employees', JSON.stringify(employees));
+        }
+
+        // --- load from localStorage ---
+        function loadFromLocalStorage() {
+            const stored = localStorage.getItem('dhsud_region6_employees');
+            if (stored) {
+                try {
+                    employees = JSON.parse(stored);
+                } catch (e) {
+                    employees = [];
+                }
+            } else {
+                // seed with one sample employee for demonstration (optional)
+                employees = [
+                    {
+                        fullName: "Maria S. Santos",
+                        address: "123 Rizal St., Iloilo City",
+                        birthday: "1988-05-15",
+                        bloodType: "O+",
+                        contactNo: "0917 555 1234",
+                        emergencyPerson: "Jose Santos",
+                        emergencyNo: "0918 555 5678",
+                        position: "Administrative Officer II",
+                        salaryGrade: "SG-11",
+                        salary: 28500.00,
+                        division: "Administrative Division",
+                        employmentStatus: "Permanent",
+                        startDate: "2015-06-01",
+                        gisisNo: "1234-5678-90",
+                        sssNo: "34-1234567-8",
+                        tinNo: "123-456-789-000",
+                        pagibigNo: "1234-5678-9012",
+                        philhealthNo: "12-345678901-2"
+                    }
+                ];
+            }
+            renderTable();
+        }
+
+        // --- form submit handler ---
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // gather values
+            const newEmployee = {
+                fullName: document.getElementById('fullName').value.trim(),
+                address: document.getElementById('address').value.trim(),
+                birthday: document.getElementById('birthday').value,
+                bloodType: document.getElementById('bloodType').value,
+                contactNo: document.getElementById('contactNo').value.trim(),
+                emergencyPerson: document.getElementById('emergencyPerson').value.trim(),
+                emergencyNo: document.getElementById('emergencyNo').value.trim(),
+                position: document.getElementById('position').value.trim(),
+                salaryGrade: document.getElementById('salaryGrade').value.trim(),
+                salary: parseFloat(document.getElementById('salary').value) || 0,
+                division: document.getElementById('division').value.trim(),
+                employmentStatus: document.getElementById('employmentStatus').value,
+                startDate: document.getElementById('startDate').value,
+                gisisNo: document.getElementById('gisisNo').value.trim(),
+                sssNo: document.getElementById('sssNo').value.trim(),
+                tinNo: document.getElementById('tinNo').value.trim(),
+                pagibigNo: document.getElementById('pagibigNo').value.trim(),
+                philhealthNo: document.getElementById('philhealthNo').value.trim()
+            };
+
+            // basic validation (HTML required handles most, but double-check empty date etc.)
+            if (!newEmployee.fullName || !newEmployee.address || !newEmployee.birthday || 
+                !newEmployee.bloodType || !newEmployee.contactNo || !newEmployee.emergencyPerson || 
+                !newEmployee.emergencyNo || !newEmployee.position || !newEmployee.salaryGrade || 
+                isNaN(newEmployee.salary) || !newEmployee.division || !newEmployee.employmentStatus || 
+                !newEmployee.startDate || !newEmployee.gisisNo || !newEmployee.sssNo || 
+                !newEmployee.tinNo || !newEmployee.pagibigNo || !newEmployee.philhealthNo) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // add to array
+            employees.push(newEmployee);
+            saveToLocalStorage();
+            renderTable();
+
+            // reset form
+            form.reset();
+            // set default empty bloodType / status etc. back to placeholder
+            document.getElementById('bloodType').value = '';
+            document.getElementById('employmentStatus').value = '';
+
+            // focus first field
+            document.getElementById('fullName').focus();
+        });
+
+        // --- initialize ---
+        loadFromLocalStorage();
+
+        // also save when deleting (already handled inside renderTable -> but we need to save after delete)
+        // We'll wrap deleteEmployee to save
+        const originalDelete = deleteEmployee;
+        deleteEmployee = function(index) {
+            if (index >= 0 && index < employees.length) {
+                employees.splice(index, 1);
+                saveToLocalStorage();
+                renderTable();
+            }
+        };
+
+        // re-assign delete button listeners due to reassignment above; easiest is to patch renderTable to use the new delete
+        // but we already call deleteEmployee inside renderTable's listener; it will now use the updated global.
+        // For safety, override the listener creation:
+
+        // Override renderTable to ensure it uses updated delete (not strictly needed but clean)
+        const originalRender = renderTable;
+        renderTable = function() {
+            if (employees.length === 0) {
+                tableBody.innerHTML = `
+                    <tr class="empty-row">
+                        <td colspan="19">
+                            <i class="fas fa-user-slash" style="margin-right: 0.6rem;"></i>
+                            No employees yet. Add your first DHSUD Region VI employee above.
+                        </td>
+                    </tr>
+                `;
+                updateCounts();
+                return;
+            }
+
+            let html = '';
+            employees.forEach((emp, index) => {
+                html += `
+                    <tr>
+                        <td><strong>${escapeHtml(emp.fullName)}</strong></td>
+                        <td>${escapeHtml(emp.address)}</td>
+                        <td>${escapeHtml(emp.birthday)}</td>
+                        <td>${escapeHtml(emp.bloodType)}</td>
+                        <td>${escapeHtml(emp.contactNo)}</td>
+                        <td>${escapeHtml(emp.emergencyPerson)}</td>
+                        <td>${escapeHtml(emp.emergencyNo)}</td>
+                        <td>${escapeHtml(emp.position)}</td>
+                        <td>${escapeHtml(emp.salaryGrade)}</td>
+                        <td>₱ ${formatSalary(emp.salary)}</td>
+                        <td>${escapeHtml(emp.division)}</td>
+                        <td>${escapeHtml(emp.employmentStatus)}</td>
+                        <td>${escapeHtml(emp.startDate)}</td>
+                        <td>${escapeHtml(emp.gisisNo)}</td>
+                        <td>${escapeHtml(emp.sssNo)}</td>
+                        <td>${escapeHtml(emp.tinNo)}</td>
+                        <td>${escapeHtml(emp.pagibigNo)}</td>
+                        <td>${escapeHtml(emp.philhealthNo)}</td>
+                        <td>
+                            <button class="btn-delete" data-index="${index}">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tableBody.innerHTML = html;
+            updateCounts();
+
+            document.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const idx = this.getAttribute('data-index');
+                    if (idx !== null) {
+                        deleteEmployee(parseInt(idx));
+                    }
+                });
+            });
+        };
+
+        // re-render with the new render function
+        renderTable();
+        // Also refresh load if needed
+        // ensure counts
+        updateCounts();
+    })();
+</script>
+</body>
+</html>
